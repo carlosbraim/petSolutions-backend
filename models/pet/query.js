@@ -69,6 +69,19 @@ const updateConsultationAtivo = () => {
     return `UPDATE consulta SET Ativo = 0 WHERE Id = ?`;
 }
 
+
+const updateConsultation = (data) => {
+    const query = []
+    Object.keys(data).map(item => {
+        if(item != "Uid" && item != "Id"){
+            query.push(`${item} = ?`);
+        }
+        return item;
+    })
+console.log("data" + data)
+console.log("query" + query)
+    return `UPDATE consulta SET ${query.join(",")} WHERE Id = '${data.Id} '`
+}
   
 
 module.exports = { 
@@ -78,5 +91,6 @@ module.exports = {
     updatePetAtivo,
     isertConsultation,
     selectConsultationId,
-    updateConsultationAtivo
+    updateConsultationAtivo,
+    updateConsultation
 };

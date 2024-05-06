@@ -6,6 +6,7 @@ const {
     updatePetAtivoModel,
     setNewConsultation,
     getConsultationById,
+    updateConsultationModel,
     updateConsultationAtivoModel
    } = require('../models/pet/pet');
 
@@ -119,6 +120,33 @@ const {
     }
   }
 
+
+  async function updateConsultationController(req, res){
+    try{
+      //let data = req.query.Id;
+      let data = req.body;
+      const token = req?.headers?.authorization?.replace(/Bearer /gi, '');
+      const decoded = jwt.verify(token, '@pethash');
+
+      console.log('token',token)
+      console.log('decoded',decoded)
+      console.log('decoded.typeUser',decoded.typeUser)
+      if(decoded.typeUser == 1){
+        const update = await updateConsultationModel(data)
+        if(update.affectedRows ==0){
+          return res.status(404).json({ error: 'Dados Consulta nao atualizados'});
+        }
+        return res.status(200).json(update);
+      }else{
+        return res.status(400).json({ error: 'Acesso negado'});
+      }
+      
+    }catch(err){
+      console.log(err);
+      return res.status(400).json({ error: 'Error ao atualizar dados Consulta'});
+    }
+  }
+
   async function postNewPetController(req, res, next){
     try{      
       console.log("req.body do New Pet",req.body);
@@ -190,5 +218,6 @@ const {
     updatePetAtivoController,
     postNewConsultationController,
     getConsultationController,
-    updateConsultationAtivoController
+    updateConsultationAtivoController,
+    updateConsultationController
 };

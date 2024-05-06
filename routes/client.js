@@ -14,4 +14,4 @@ router.get('/getClient', verifyToken, getClientController);
 router.patch('/updateClientAtivo', verifyToken ,updateClientAtivoController);
 
 
-module.exports = router;
+module.exports = router; 

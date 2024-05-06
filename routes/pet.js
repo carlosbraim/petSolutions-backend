@@ -8,6 +8,7 @@ const {
     updatePetAtivoController,
     postNewConsultationController,
     getConsultationController,
+    updateConsultationController,
     updateConsultationAtivoController
 } = require('../controller/pet');
 
@@ -18,6 +19,7 @@ router.post('/newPet', verifyToken ,postNewPetController);
 router.patch('/updatePetAtivo', verifyToken ,updatePetAtivoController);
 router.post('/newConsultation', verifyToken ,postNewConsultationController);
 router.get('/getConsultation', verifyToken, getConsultationController);
+router.patch('/updateConsultation', verifyToken ,updateConsultationController);
 router.patch('/updateConsultationAtivo', verifyToken ,updateConsultationAtivoController);
 
 
