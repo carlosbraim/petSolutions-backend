@@ -112,8 +112,7 @@ async function updateConsultationModel(data) {
       console.log("Erro ao inserir o Pet por ID")
       console.log(err)
     }
-  }
-  
+  } 
   
 
 
