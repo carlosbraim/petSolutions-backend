@@ -1,7 +1,7 @@
 const { Connection } = require('../../DataBase/Connection');
 const { 
         selectClientVet,
-        
+        insertItensClientVet
         } = require('./query');
 
 
@@ -18,11 +18,21 @@ async function getClientVet(clientVet){
     }
   }
 
-  
+async function setClientVet(data) {
+    try{
+        conn = await Connection.getConnection();        
+        const [user] = await conn.query(insertItensClientVet(data));
+        conn.release();
+        return user;
+      }catch(err){
+        console.log("Erro ao inserir o cliente do veterinario")
+        console.log(err)
+    }
+}
 
 
 module.exports = {
     
     getClientVet,
-    
+    setClientVet
 };

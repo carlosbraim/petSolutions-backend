@@ -1,5 +1,6 @@
 const { 
     getClientVet,
+    setClientVet
 
 } = require('../models/clientVet/clientVet');
 const jwt = require('jsonwebtoken');
@@ -21,9 +22,37 @@ async function getClientVetController(req, res){
 }  
 
 
+async function postNewClientVetController(req, res, next) {
+    try {
+        console.log("req.body do New ClientVet", req.body);
+        
+
+        const insertClient = await setClientVet(req.body);
+
+        if (insertClient.affectedRows === 0)
+            return res.status(404).json({ error: 'Erro ao inserir Cliente para o Veterinario' });
+
+        const dataClientVet = {
+                       
+            nome: req.body.nome,
+            telefone: req.body.telefone,
+            endereco: req.body.endereco,
+            uid_dadosusuario_fk: req.body.uid_dadosusuario_fk,            
+        };
+        const token = jwt.sign(dataClientVet, '@pethash', { expiresIn: '12h' });
+        console.log('token', token);
+        res.status(200).json({ message: "Dados inseridos com sucesso", token: token });
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json({ error: 'Erro ao inserir dados na tabela cliente' });
+    }
+}
+
+
 
 module.exports = {
 
     getClientVetController,
+    postNewClientVetController
 
 };
