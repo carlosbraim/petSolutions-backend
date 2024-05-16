@@ -8,7 +8,7 @@ const routerCategory = require('./routes/category')
 const routerUser = require('./routes/user')
 const routerPet = require('./routes/pet') 
 const routerClient = require('./routes/client')
-
+const routerClientVet = require('./routes/clientVet')
 
 app.use(cors());
 app.use(morgan('dev'));
@@ -41,6 +41,7 @@ try {
     app.use('/user', routerUser);
     app.use('/pet', routerPet);
     app.use('/client', routerClient);
+    app.use('/clientVet', routerClientVet);
 } catch (error) {
     throw new Error('Erro ao executar rota get.');
 }
