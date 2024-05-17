@@ -1,7 +1,8 @@
 const { Connection } = require('../../DataBase/Connection');
 const { 
         selectClientVet,
-        insertItensClientVet
+        insertItensClientVet,
+        updateClientVetAtivo
         } = require('./query');
 
 
@@ -30,9 +31,23 @@ async function setClientVet(data) {
     }
 }
 
+async function updateClientVetAtivoModel(data) {
+    try {
+      conn = await Connection.getConnection();
+      console.log("data.Id", data.Id); // Adicionado para logar o valor do Id
+      const [user] = await conn.query(updateClientVetAtivo(data), [data.Id]);
+      conn.release();
+      return user;
+    } catch (err) {
+      console.log("Erro ao atualizar cliente veterinario Ativo");
+      console.log(err);
+    }
+}
+
 
 module.exports = {
     
     getClientVet,
-    setClientVet
+    setClientVet,
+    updateClientVetAtivoModel
 };

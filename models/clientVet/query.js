@@ -18,8 +18,13 @@ const insertItensClientVet = (data) => {
     return `INSERT INTO clientes (${query.join(",")}) VALUES (${queryValues.join(",")})`
 }
 
+const updateClientVetAtivo = () => {
+    return `UPDATE clientes SET Ativo = 0 WHERE Id = ?`;
+}
+
 module.exports = {
 
     selectClientVet,
-    insertItensClientVet
+    insertItensClientVet,
+    updateClientVetAtivo
 };
