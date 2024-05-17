@@ -13,4 +13,5 @@ router.get('/getClientVet', verifyToken, getClientVetController);
 router.post('/newClientVet', verifyToken ,postNewClientVetController);
 router.patch('/updateClientVetAtivo', verifyToken ,updateClientVetAtivoController);
 
+
 module.exports = router;
