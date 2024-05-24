@@ -1,7 +1,8 @@
 const { 
   getUserById, 
   setUserById,
-  updateUserModel   
+  updateUserModel,
+  setLog   
  } = require('../models/user/user');
 
 const jwt = require('jsonwebtoken');
@@ -76,9 +77,31 @@ async function updateUserController(req, res){
   }
 }
 
+async function postLogController(req, res, next) {
+  try {
+      console.log("req.body do LOG", req.body);    
+
+      const insertLog = await setLog(req.body);
+
+      if (insertLog.affectedRows === 0)
+          return res.status(404).json({ error: 'Erro ao inserir Log' });
+
+      const dataLog = {                  
+          uid_dadosusuario_fk: req.body.uid_dadosusuario_fk,            
+      };
+      const token = jwt.sign(dataLog, '@pethash', { expiresIn: '12h' });
+      console.log('token', token);
+      res.status(200).json({ message: "Dados inseridos com sucesso", token: token });
+  } catch (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'Erro ao inserir dados Log na tabela' });
+  }
+}
+
 
 module.exports = { 
   postAuthenticationController,
   getUserController,
-  updateUserController
+  updateUserController,
+  postLogController
 };

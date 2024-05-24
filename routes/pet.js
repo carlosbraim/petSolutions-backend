@@ -10,6 +10,7 @@ const {
     getConsultationController,
     updateConsultationController,
     updateConsultationAtivoController
+   
 } = require('../controller/pet');
 
 const {verifyToken} = require('../token')

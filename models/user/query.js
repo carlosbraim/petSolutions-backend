@@ -18,9 +18,11 @@ const updateUser = (data) => {
 
     return `UPDATE dadosusuario SET ${query.join(",")} WHERE Uid = '${data.Uid}'`
 }
+const insertItensLog = `INSERT INTO logacesso (Uid, data) VALUES (?, NOW() )`;
+
 
 module.exports = { 
-    selectUserId, insertItens, updateUser
+    selectUserId, insertItens, updateUser, insertItensLog
 };
 
 

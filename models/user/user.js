@@ -3,7 +3,8 @@ const { Connection } = require('../../DataBase/Connection');
 const {
   selectUserId, 
   insertItens,
-  updateUser
+  updateUser,
+  insertItensLog
 } = require('./query');
 
 async function getUserById(userid){
@@ -46,9 +47,21 @@ async function setUserById(data){
     }
   }
 
+  async function setLog(data){
+    try{
+      conn = await Connection.getConnection();
+      const [LogUser] = await conn.query(insertItensLog, Object.values(data));
+      conn.release();
+      return LogUser;
+    }catch(err){
+      console.log("Erro ao inserir Log de Usuario por uid")
+      console.log(err)
+    }
+  }
 
 module.exports = {
   getUserById,
   setUserById,
-  updateUserModel
+  updateUserModel,
+  setLog
 };
