@@ -20,7 +20,6 @@ const updateUser = (data) => {
 }
 const insertItensLog = `INSERT INTO logacesso (Uid, data) VALUES (?, NOW() )`;
 
-
 module.exports = { 
     selectUserId, insertItens, updateUser, insertItensLog
 };

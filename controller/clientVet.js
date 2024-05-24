@@ -25,8 +25,7 @@ async function getClientVetController(req, res){
 
 async function postNewClientVetController(req, res, next) {
     try {
-        console.log("req.body do New ClientVet", req.body);
-        
+        console.log("req.body do New ClientVet", req.body);        
 
         const insertClient = await setClientVet(req.body);
 
