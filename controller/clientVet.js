@@ -32,8 +32,7 @@ async function postNewClientVetController(req, res, next) {
         if (insertClient.affectedRows === 0)
             return res.status(404).json({ error: 'Erro ao inserir Cliente para o Veterinario' });
 
-        const dataClientVet = {
-                       
+        const dataClientVet = {                       
             nome: req.body.nome,
             telefone: req.body.telefone,
             endereco: req.body.endereco,
@@ -49,14 +48,11 @@ async function postNewClientVetController(req, res, next) {
 }
 
 async function updateClientVetAtivoController(req, res){
-    try{
-      //let data = req.query.Id;
-      
+    try{    
       const token = req?.headers?.authorization?.replace(/Bearer /gi, '');
       const decoded = jwt.verify(token, '@pethash');
       let data = { Id: req.body.Id };
       console.log("data dentro updateClientVetAtivoController  ",data)
-
       console.log('token',token)
       console.log('decoded',decoded)
       //console.log('decoded.typeUser',decoded.typeUser)
