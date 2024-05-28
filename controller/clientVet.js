@@ -55,16 +55,16 @@ async function updateClientVetAtivoController(req, res){
       console.log("data dentro updateClientVetAtivoController  ",data)
       console.log('token',token)
       console.log('decoded',decoded)
-      //console.log('decoded.typeUser',decoded.typeUser)
-      //if(decoded.typeUser == 1){
+      console.log('decoded.typeUser',decoded.typeUser)
+      if(decoded.typeUser == 1){
         const update = await updateClientVetAtivoModel(data)
         if(update.affectedRows ==0){
           return res.status(404).json({ error: 'Client veterinario Ativo nao atualizados'});
         }
         return res.status(200).json(update);
-     /* }else{
+      }else{
         return res.status(400).json({ error: 'Acesso negado'});
-      }*/
+      }
       
     }catch(err){
       console.log(err);
